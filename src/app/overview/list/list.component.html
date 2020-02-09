@@ -1,0 +1,66 @@
+<h6>Create Todo:</h6>
+<form #todoForm="ngForm" (ngSubmit)="onNew()">
+  <div class="form-row">
+    <div class="col-auto">
+      <input #description="ngModel"
+             [(ngModel)]="model.description"
+             class="form-control"
+             name="Description"
+             placeholder="Description"
+             type="text">
+    </div>
+    <div class="col-auto">
+      <input #responsible="ngModel"
+             [(ngModel)]="model.responsible"
+             class="form-control"
+             name="Responsible"
+             placeholder="Responsible"
+             type="text">
+    </div>
+    <div class="col-auto">
+      <select #priority="ngModel"
+              [(ngModel)]="model.priority"
+              class="form-control"
+              id="priority"
+              name="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" type="submit">Create</button>
+    </div>
+  </div>
+</form>
+<br>
+<h6>Todos List:</h6>
+<div *ngIf="(todos|async)?.length>0">
+  <table class="table">
+    <thead class="thread-inverse">
+    <tr>
+      <th>#</th>
+      <th>Description</th>
+      <th>Responsible</th>
+      <th>Priority</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr (click)="toggleTodo(t.id)" *ngFor="let t of todos | async">
+      <td>{{t.id}}</td>
+      <td>{{t.description}}</td>
+      <td>{{t.responsible}}</td>
+      <td>
+        <span *ngIf="t.priority==='low'" class="badge badge-success">LOW</span>
+        <span *ngIf="t.priority==='medium'" class="badge badge-warning">MEDIUM</span>
+        <span *ngIf="t.priority==='high'" class="badge badge-danger">HIGH</span>
+      </td>
+      <td>
+        <button (click)="removeTodo(t.id)" class="btn btn-primary">Delete</button>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

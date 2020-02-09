@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-redux"
+    }
+  },
+  "defaultProject": "angular-redux",
+  "cli": {
+    "analytics": "978b6061-8598-4a44-91aa-725567a205a1"
+  }
 }
